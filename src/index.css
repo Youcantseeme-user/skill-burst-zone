@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* SkillSprint Design System - Learning Platform Theme */
 
 @layer base {
   :root {
+    /* Learning Platform Color Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 26% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 26% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 26% 14%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Learning Blue/Purple */
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 258 90% 60%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Professional Gray */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 26% 14%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Success: Achievement Green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warning: Streak Orange */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 26% 14%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 258 90% 66%;
 
     --radius: 0.5rem;
+
+    /* Learning Platform Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(258 90% 66%), hsl(240 100% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 14% 98%));
+    --gradient-progress: linear-gradient(90deg, hsl(142 76% 36%), hsl(120 76% 46%));
+    --gradient-streak: linear-gradient(90deg, hsl(38 92% 50%), hsl(25 92% 60%));
+
+    /* Learning Platform Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(220 26% 14% / 0.1), 0 2px 4px -1px hsl(220 26% 14% / 0.06);
+    --shadow-hover: 0 10px 15px -3px hsl(258 90% 66% / 0.1), 0 4px 6px -2px hsl(258 90% 66% / 0.05);
+    --shadow-glow: 0 0 20px hsl(258 90% 66% / 0.3);
+
+    /* Learning Platform Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +126,85 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* SkillSprint Component Styles */
+@layer components {
+  .hero-section {
+    background: var(--gradient-hero);
+    @apply text-white;
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .card-gradient:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .progress-bar {
+    background: var(--gradient-progress);
+  }
+
+  .streak-badge {
+    background: var(--gradient-streak);
+    @apply text-white font-semibold px-3 py-1 rounded-full text-sm;
+  }
+
+  .skill-card {
+    @apply bg-card rounded-lg p-6 border transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .navbar-dropdown {
+    @apply bg-popover border rounded-lg shadow-lg p-2 min-w-48;
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .sidebar-nav {
+    @apply space-y-2;
+  }
+
+  .sidebar-nav-item {
+    @apply flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors;
+  }
+
+  .sidebar-nav-item:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .sidebar-nav-item.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .stat-card {
+    @apply bg-card rounded-xl p-6 border;
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* SkillSprint Utility Classes */
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
   }
 }
