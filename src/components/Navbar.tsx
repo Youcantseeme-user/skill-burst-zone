@@ -35,10 +35,12 @@ const Navbar = () => {
             </Link>
 
             {/* Skills Dropdown */}
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsSkillsOpen(true)}
+              onMouseLeave={() => setIsSkillsOpen(false)}
+            >
               <button
-                onMouseEnter={() => setIsSkillsOpen(true)}
-                onMouseLeave={() => setIsSkillsOpen(false)}
                 className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors font-medium"
               >
                 <span>Skills</span>
@@ -46,21 +48,20 @@ const Navbar = () => {
               </button>
 
               {isSkillsOpen && (
-                <div
-                  onMouseEnter={() => setIsSkillsOpen(true)}
-                  onMouseLeave={() => setIsSkillsOpen(false)}
-                  className="absolute top-full left-0 mt-2 navbar-dropdown"
-                >
-                  {skillCategories.map((skill) => (
-                    <Link
-                      key={skill.path}
-                      to={skill.path}
-                      className="flex items-center space-x-3 px-4 py-3 hover:bg-accent rounded-lg transition-colors"
-                    >
-                      <skill.icon className="w-5 h-5 text-primary" />
-                      <span className="font-medium">{skill.name}</span>
-                    </Link>
-                  ))}
+                <div className="absolute top-full left-0 pt-2">
+                  <div className="navbar-dropdown">
+                    {skillCategories.map((skill) => (
+                      <Link
+                        key={skill.path}
+                        to={skill.path}
+                        className="flex items-center space-x-3 px-4 py-3 hover:bg-accent rounded-lg transition-colors"
+                        onClick={() => setIsSkillsOpen(false)}
+                      >
+                        <skill.icon className="w-5 h-5 text-primary" />
+                        <span className="font-medium">{skill.name}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
